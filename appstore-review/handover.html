@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>Trunex — Handover 31 Aug 2026</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Helvetica, Arial, sans-serif; color:#14171c; font-size:10.2pt; line-height:1.48; margin:0; }
+  h1 { font-size:20pt; margin:0 0 2mm; letter-spacing:-0.4pt; }
+  h2 { font-size:12.5pt; margin:8mm 0 3mm; padding-bottom:1.5mm; border-bottom:2px solid #FF6B00; }
+  h3 { font-size:10.5pt; margin:4mm 0 1.5mm; color:#B14A00; }
+  p { margin:0 0 2.5mm; }
+  ul,ol { margin:0 0 3mm; padding-left:5mm; }
+  li { margin-bottom:1.3mm; }
+  .sub { color:#5a6472; font-size:9pt; margin-bottom:5mm; }
+  .rule { height:3px; background:#FF6B00; width:30mm; margin:0 0 4mm; }
+  .box { border:1px solid #d8dde4; border-left:3px solid #FF6B00; background:#fbfbfc; padding:3mm 3.5mm; margin:0 0 4mm; }
+  .stop { border:2px solid #C62828; background:#FFF5F5; padding:3.5mm 4mm; margin:0 0 5mm; }
+  .stop h3 { color:#C62828; margin-top:0; }
+  .banned { font-family:"Courier New",monospace; font-size:9.4pt; color:#C62828; margin:1.5mm 0 2.5mm 4mm; }
+  table { width:100%; border-collapse:collapse; margin:0 0 4mm; font-size:9pt; }
+  th { background:#f2f4f7; text-align:left; padding:2mm; border:1px solid #d8dde4; }
+  td { padding:2mm; border:1px solid #d8dde4; vertical-align:top; }
+  code { font-family:"Courier New",monospace; font-size:8.8pt; background:#f2f4f7; padding:0 0.8mm; }
+  .wrong { color:#C62828; font-weight:bold; }
+  .right { color:#1B5E20; font-weight:bold; }
+  .foot { margin-top:7mm; padding-top:2mm; border-top:1px solid #d8dde4; color:#5a6472; font-size:8.2pt; }
+</style></head><body>
+
+<div class="rule"></div>
+<h1>Trunex — handover from the phone chat</h1>
+<p class="sub">31 August 2026 · written for the next session, especially Claude Code on the laptop<br>
+This session had no memory tool. Everything below came from the repo, the commit history, the build runs, and the PO.</p>
+
+<div class="stop">
+<h3>0 · Standing rules the PO had to repeat today</h3>
+<p><strong>Rule 2</strong> (made 30 Aug 2026 — the second most important rule in this collaboration). Never use hedging or honesty-signalling phrases. Banned outright:</p>
+<p class="banned">"I will not guess" · "rather than assume" · "rather than guessing"<br>"I will not fabricate" · "I could not verify, so…"</p>
+<p>State the fact. If something is unknown, name it in one plain clause and move on. He has asked for this repeatedly and seeing it again makes him furious.</p>
+<p><strong>English only</strong> in every reply, even though he writes in Romanian.</p>
+<p><strong>Never end a turn asking "want me to X?"</strong> Decide and do it. This is the rule he cares about most.</p>
+<p><strong>The PO does nothing technical.</strong> No git, no commands, no reviewing branches.</p>
+</div>
+
+<h2>1 · Where the App Store submission stands</h2>
+<p>iOS Trunex <strong>1.4.0 (build 19)</strong>, bundle <code>app.trunex.main</code>, uploaded to App Store Connect on <strong>30 Aug at 14:35</strong> local, on the fourth release run.</p>
+<p>Apple sent an <strong>"Information Needed"</strong> message. <strong>They did not reject the app.</strong> They asked for seven things: a screen recording made on a physical device starting from app launch and covering registration, login, account deletion, paid flows, user-generated content with reporting and blocking, and every permission prompt; the devices and OS versions tested; what the app does and who it is for; how to reach the main features, with credentials; the external services it depends on; regional differences; and any regulated-industry or third-party-material documentation.</p>
+<div class="box"><strong>Nothing has been sent to Apple.</strong> The PO approves everything before it goes. The drafted reply is <code>Trunex_Reply_to_Apple_v2_31Aug2026.pdf</code>, in his Downloads and committed under <code>appstore-review/</code> on branch <code>claude/app-store-review-submission-ino4ga</code> of <code>g-1776812341-5630</code>.</div>
+<p><strong>Two blanks remain, both held by the PO:</strong> the reviewer account's username and password — they exist, he created them deliberately so an Apple reviewer could use the whole app — and the iPhone model and iOS version used for testing and filming.</p>
+
+<h2>2 · Two things this session got wrong, corrected</h2>
+<p><span class="wrong">Wrong:</span> "a reviewer hits a wall saying Your application is with us."<br>
+<span class="right">Truth:</span> <code>/api/guest/config</code> exists precisely so they do not. The worker's own comment: <em>"Store reviewers open an invitation-only app with no account; this is how they get in."</em> Opening the app gives guest browse mode — map, stories, business, founding. The pending screen appears only after a completed registration. Guest mode locks messaging, SOS, presence, profile, rides and invite.</p>
+<p><span class="wrong">Wrong:</span> "Trunex is for travellers, expatriates, people far from home."<br>
+<span class="right">Truth, from the PO:</span> Trunex is for <strong>every person on the planet</strong> who needs help in some field, on some subject, at some moment. <strong>The person asking need not be the person who needs the help.</strong> His example: his daughter Bobo moved to Paris to work in a Michelin restaurant kitchen and needed somewhere trustworthy to rent. He would open Trunex, find vouched members in Paris, and ask them to help her find a place. Neither is a tourist; neither is an expat in the marketing sense. That is a normal Trunex request.</p>
+<div class="box">The marketing line, used on the store screenshots for both stores:<br><strong>"Trunex is a safety net you build before you ever need it."</strong> — with <em>ever</em>.</div>
+
+<h2>3 · Work done today — all on branches, nothing deployed, nothing merged</h2>
+<p>Repo <code>trunex-app</code>, branch <code>claude/session-continuity-claudemd</code>, three commits.</p>
+<table>
+<tr><th style="width:32mm">What</th><th>Detail</th></tr>
+<tr><td><code>CLAUDE.md</code> added</td><td>At the repo root. Every Claude Code session clones this repo and reads it automatically, so a session can no longer open blind. Carries the build-19 state, the ITMS failures fixed on the way there, the open items, and the standing rules.</td></tr>
+<tr><td>Donate dead end fixed</td><td>Build 19 ships with billing off. Pro and Passes were already hidden; Donate was left outside the guard and opened a screen whose only button is disabled — a Guideline 2.1 dead end. Now gated on the resolved payment rail, not on <code>STORE_BILLING_ENABLED</code>, because the build flag would wrongly hide Donate on the web where Stripe works. Four tests.</td></tr>
+<tr><td>Guidelines copy fixed</td><td>It opened with "Trunex activates when you travel… a human connection when you're far from home" — left from an early version, describing a far smaller product, read by every member and by the Apple reviewer. Replaced with the safety-net positioning plus the asking-for-someone-else point. Same sentence fixed in <code>community-guidelines.html</code>. The "What we believe" bullet on Why Trunex widened from "far from home" to "wherever you are", in both the screen and the web page. The founder story in <code>about.html</code> and the Arad breakdown narrative were left alone on purpose — biography and a specific night, not definitions.</td></tr>
+</table>
+<p>Typecheck clean, 38 tests pass on all of it.</p>
+<div class="box"><strong>Note.</strong> The in-app guidelines screen is baked into the binary, so build 19 still carries the old travel sentence; only a new build changes it. The worker-served <code>community-guidelines.html</code> changes on the next production deploy, which needs the PO's explicit per-change yes.</div>
+
+<h2>4 · The process decision taken</h2>
+<p><strong>Do not replace build 19.</strong> Apple asked for information, not a code change. On App Store Connect, using a new build means pulling the submission and resubmitting, which loses queue position. Reply against build 19; the Donate fix and the copy fix ride in 1.4.1 after approval.</p>
+<p>Committing to the repo does not touch the frozen binary. The only live surface during a review is the backend, which is why no production deploy should happen while a reviewer is exercising the app.</p>
+
+<h2>5 · Open question the laptop can answer from memory</h2>
+<p><strong>Was Trunex Main actually submitted to Google Play for review?</strong> Evidence found here: <code>scripts/play-upload.mjs</code> written 28 Aug as a "one-command first-listing publisher", Play review images zipped to Drive on 28 Aug, and the <code>/child-safety</code> page shipped 30 Aug for the CSAE declaration. Nothing readable from this session confirms a submission happened, and the 14 Aug status board still said Main was sideload-only. The laptop holds the memory from 23–30 August and will know.</p>
+<p>If Play is in review, the same freeze logic applies, with one difference: Play lets a new release supersede one in review without Apple's queue penalty.</p>
+
+<h2>6 · Why this document exists</h2>
+<p>The PO opened that chat on his phone. Claude Code on the web runs in a fresh cloud container with Google Drive and GitHub and <strong>no memory tool</strong>, so it could not read anything saved by the 30 August session — <code>session_01X6f7hDqqm8dnPaoBTNXRQg</code>, which closed at 15:46 local with <em>"all memory + status saved; Trunex Main in review"</em>. It saved correctly, to a place that surface cannot open.</p>
+<p>A claude.ai chat, or Claude Code on the laptop, has the memory index. A Claude Code web session does not. <strong>Whatever a session saves to memory, it must also write here and to the status board</strong>, or the next session on a different surface starts blind.</p>
+
+<div class="foot">Trunex · handover from the Claude Code web session of 31 August 2026 · verified against <code>gabinicolae01-cloud/trunex-app</code> @ <code>1d13b40</code>. Nothing has been sent to Apple; nothing has been deployed or merged.</div>
+</body></html>
