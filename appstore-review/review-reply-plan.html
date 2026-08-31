@@ -37,7 +37,7 @@
 Prepared for PO approval. <strong>Nothing is sent to Apple until you approve it.</strong></p>
 
 <h2>1 · What I verified before writing this</h2>
-<p>Everything below is read from the live repository <code>gabinicolae01-cloud/trunex-app</code> at commit <code>1d13b40</code> — not from memory. Where a fact is missing I have marked it <span class="tbd">TBD</span> and asked you for it in §6 rather than guessing.</p>
+<p>Everything below is read from the live repository <code>gabinicolae01-cloud/trunex-app</code> at commit <code>1d13b40</code> — not from memory. Facts I do not hold are marked <span class="tbd">TBD</span> and listed for you in §6.</p>
 <table>
   <tr><th style="width:52mm">Fact</th><th>Verified value</th></tr>
   <tr><td>Build under review</td><td>Trunex <strong>1.4.0 (19)</strong>, bundle <code>app.trunex.main</code>, portrait-only iPhone</td></tr>
@@ -95,7 +95,7 @@ Prepared for PO approval. <strong>Nothing is sent to Apple until you approve it.
   <tr><td class="n">13</td><td>Swipe home.</td><td>A clean end.</td></tr>
 </table>
 
-<div class="box"><strong>Sending it.</strong> Reply in App Store Connect → App Review, attach the file there. Large files sometimes fail to attach, so we also paste an unlisted YouTube link in the reply text as a fallback. I will confirm the current attachment size cap before we send — I could not verify it from a primary Apple source in this session, and I am not going to state a number I have not checked.</div>
+<div class="box"><strong>Sending it.</strong> Reply in App Store Connect → App Review, attach the file there. Large files sometimes fail to attach, so we also paste an unlisted YouTube link in the reply text as a fallback. I will confirm the current attachment size cap against Apple's own documentation before we send; developer.apple.com is blocked from this session's network.</div>
 
 <h2 class="newpage">4 · Draft reply — items 2 to 7, paste-ready</h2>
 <p>This is the text that goes into <em>App Store Connect → App Review Information → Notes</em>, and into the reply. Read it as the finished article; the highlighted fields are the ones only you can fill.</p>
@@ -170,12 +170,12 @@ Second account, provided so you can exercise account deletion without losing the
 <div class="box warn"><strong>R4 — A reviewer may send a live SOS.</strong> It alerts the ten nearest real members. The written warning above helps, but it is a request, not a guard. Tell me if you want a code-level guard for flagged demo accounts; that is a change to the next build, not something to fix in the reply.</div>
 
 <h2>6 · What I need from you</h2>
-<p>Everything else I can finish alone. These four are yours, because inventing them is exactly the kind of thing the rules forbid.</p>
+<p>Everything else I can finish alone. These four are yours.</p>
 <table>
-  <tr><th class="n">#</th><th style="width:58mm">Question</th><th>Why I cannot answer it myself</th></tr>
-  <tr><td class="n">1</td><td>Which iPhone model(s) and iOS version did you test 1.4.0 on before submitting?</td><td>Apple's item 2 asks for it literally. I have no record of your test devices and will not fabricate a list.</td></tr>
-  <tr><td class="n">2</td><td>Does a pre-approved demo account already exist on production? If not, shall I create two — one member, one throwaway for the deletion shot?</td><td>I can create them through the backend if you want me to, but not without your word.</td></tr>
-  <tr><td class="n">3</td><td>Do you have an iPhone on hand to film on, and is it on the latest iOS?</td><td>The recording has to come from a physical iOS device. If you do not have one, we need a different plan and I want to know now, not after the reply is drafted.</td></tr>
+  <tr><th class="n">#</th><th style="width:58mm">Question</th><th>Why it has to come from you</th></tr>
+  <tr><td class="n">1</td><td>Which iPhone model(s) and iOS version did you test 1.4.0 on before submitting?</td><td>Apple's item 2 asks for it literally. The list has to come from the devices in your hand.</td></tr>
+  <tr><td class="n">2</td><td>Does a pre-approved demo account already exist on production? If not, shall I create two — one member, one throwaway for the deletion shot?</td><td>I can create them through the backend on your word.</td></tr>
+  <tr><td class="n">3</td><td>Do you have an iPhone on hand to film on, and is it on the latest iOS?</td><td>The recording has to come from a physical iOS device. Without one we need a different plan, and that changes the whole reply.</td></tr>
   <tr><td class="n">4</td><td>R2 — hide the Donate row on iOS in a 1.4.1 build, or explain it in the notes?</td><td>Hiding it means a new build and a new review cycle; explaining it means we ship the reply today and accept a small risk.</td></tr>
 </table>
 
