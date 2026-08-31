@@ -1,0 +1,184 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Trunex Main — App Store Review Reply Plan</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 16mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Helvetica, Arial, sans-serif; color: #14171c; font-size: 10pt; line-height: 1.45; margin: 0; }
+  h1 { font-size: 21pt; margin: 0 0 2mm; letter-spacing: -0.4pt; }
+  h2 { font-size: 13pt; margin: 9mm 0 3mm; padding-bottom: 1.5mm; border-bottom: 2px solid #FF6B00; }
+  h3 { font-size: 10.5pt; margin: 5mm 0 1.5mm; color: #B14A00; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  .sub { color: #5a6472; font-size: 9pt; margin-bottom: 5mm; }
+  .rule { height: 3px; background: #FF6B00; width: 30mm; margin: 0 0 4mm; }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 4mm; font-size: 8.8pt; }
+  th { background: #f2f4f7; text-align: left; padding: 1.8mm 2mm; border: 1px solid #d8dde4; font-size: 8.5pt; }
+  td { padding: 1.8mm 2mm; border: 1px solid #d8dde4; vertical-align: top; }
+  td.n { width: 9mm; text-align: center; font-weight: bold; color: #FF6B00; }
+  .box { border: 1px solid #d8dde4; border-left: 3px solid #FF6B00; background: #fbfbfc; padding: 3mm 3.5mm; margin: 0 0 4mm; }
+  .warn { border-left-color: #C62828; }
+  .warn strong:first-child { color: #C62828; }
+  .paste { border: 1px solid #c9ced6; background: #fff; padding: 4mm; font-size: 9pt; }
+  .paste h4 { margin: 4mm 0 1.5mm; font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.3pt; color: #14171c; }
+  .paste h4:first-child { margin-top: 0; }
+  .tbd { background: #FFE9D6; padding: 0 1mm; font-weight: bold; }
+  code { font-family: "Courier New", Courier, monospace; font-size: 8.6pt; background: #f2f4f7; padding: 0 0.8mm; }
+  .foot { margin-top: 8mm; padding-top: 2mm; border-top: 1px solid #d8dde4; color: #5a6472; font-size: 8pt; }
+  .keep { page-break-inside: avoid; }
+  .newpage { page-break-before: always; }
+</style></head>
+<body>
+
+<div class="rule"></div>
+<h1>Trunex Main — App Store review reply</h1>
+<p class="sub">Response plan for Apple's "Information Needed" message · iOS 1.4.0 (build 19) · 31 August 2026<br>
+Prepared for PO approval. <strong>Nothing is sent to Apple until you approve it.</strong></p>
+
+<h2>1 · What I verified before writing this</h2>
+<p>Everything below is read from the live repository <code>gabinicolae01-cloud/trunex-app</code> at commit <code>1d13b40</code> — not from memory. Where a fact is missing I have marked it <span class="tbd">TBD</span> and asked you for it in §6 rather than guessing.</p>
+<table>
+  <tr><th style="width:52mm">Fact</th><th>Verified value</th></tr>
+  <tr><td>Build under review</td><td>Trunex <strong>1.4.0 (19)</strong>, bundle <code>app.trunex.main</code>, portrait-only iPhone</td></tr>
+  <tr><td>Paid content</td><td><strong>None.</strong> <code>ios-release.yml</code> builds with billing off — "v1 ships FREE, no StoreKit products declared". No purchase or subscription flow exists in this build.</td></tr>
+  <tr><td>Code updates</td><td>Over-the-air updating is <strong>disabled</strong> for the App Store build (<code>CAP_NO_OTA=1</code>, <code>VITE_OTA_DISABLED=1</code>). The reviewed binary is what runs.</td></tr>
+  <tr><td>Permission prompts</td><td>Location (when-in-use only), Contacts, Camera, Photo Library, Face ID. <strong>No App Tracking Transparency, no background location</strong> — deliberately, and no such plugin may be added.</td></tr>
+  <tr><td>Account deletion</td><td>Real, in-app, two taps from Settings → <code>POST /api/account/delete</code> full purge. Also on the web at <code>trunex.app/delete-account</code>.</td></tr>
+  <tr><td>Report &amp; block</td><td>Both shipped: <code>features/report</code> (categories + support chat) and <code>features/blocking</code> (block button, safety sheet, blocked list).</td></tr>
+  <tr><td>The door</td><td>Membership is invitation-only <strong>and human-approved</strong>. A normal sign-up lands on "Your application is with us". This is almost certainly why the reviewer could not exercise the app.</td></tr>
+</table>
+
+<h2>2 · The video — what Apple is actually asking for</h2>
+<p>This is the part you said was unclear, so plainly:</p>
+<p><strong>It is not a marketing video.</strong> It is not the App Preview that appears on the store page. It is private evidence, seen only by the reviewer. Its single purpose is to prove that a human being held a real iPhone and that the app does what the listing says it does.</p>
+<p><strong>Why they asked us for one.</strong> Reviewers ask for a recording when they could not drive the app themselves. Trunex is invitation-only with human approval — they signed up, hit the "waiting for a human" screen, and never saw the product. The video is how they see it. The demo account (§4) is how they get in themselves. We give them both.</p>
+
+<h3>Their words, decoded</h3>
+<table>
+  <tr><th style="width:62mm">Apple wrote</th><th>What that means for us</th></tr>
+  <tr><td>"captured on a physical device"</td><td>A real iPhone in your hand. Not the Simulator, not the Android phone, not the website, not a slideshow of screenshots.</td></tr>
+  <tr><td>"running the latest operating system"</td><td>Update the iPhone to the current public iOS before filming.</td></tr>
+  <tr><td>"must begin with launching the app"</td><td>The first frame is the iPhone home screen and a finger tapping the Trunex icon. Never start with the app already open.</td></tr>
+  <tr><td>"typical user flow through its core features"</td><td>Use the app the way a member would, unhurried, in one take.</td></tr>
+  <tr><td>"registration, login, account deletion"</td><td>We have all three → all three must be on camera.</td></tr>
+  <tr><td>"paid content … purchase or subscription"</td><td><strong>Not applicable.</strong> v1 is free. We say so in writing instead of filming it.</td></tr>
+  <tr><td>"user-generated content, reporting and blocking"</td><td>We have all of it → must be on camera.</td></tr>
+  <tr><td>"prompts requesting sensitive data"</td><td>The iOS permission dialogs themselves must appear on camera — location, camera, contacts, Face ID.</td></tr>
+</table>
+<div class="box"><strong>Format.</strong> Portrait. One continuous take if you can manage it. 4–7 minutes. No music, no captions, no speed-up, no cuts that skip a screen. Narration is optional — what counts is what is on the screen. Recorded with the iPhone's own screen recorder: Settings → Control Centre → add <em>Screen Recording</em>, then swipe down and tap the record button.</div>
+
+<h2 class="newpage">3 · The shooting script</h2>
+<h3>Before you press record</h3>
+<ul>
+  <li>iPhone updated to the latest public iOS.</li>
+  <li>Install the exact build under review from TestFlight — <strong>1.4.0 (19)</strong>.</li>
+  <li><strong>Delete the app first, then reinstall.</strong> iOS shows each permission dialog once per install. If you have already granted them, they will not appear and the video fails Apple's fourth bullet.</li>
+  <li>Sign out everywhere. Have the demo credentials on paper, not on the phone.</li>
+  <li>Do Not Disturb on. Battery above 50%. Nothing personal in notifications.</li>
+</ul>
+
+<table>
+  <tr><th class="n">#</th><th style="width:52mm">What you do</th><th>What must be visible — and why Apple wants it</th></tr>
+  <tr><td class="n">1</td><td>Home screen, tap the Trunex icon.</td><td>The launch itself. Their explicit requirement: "must begin with launching the app".</td></tr>
+  <tr><td class="n">2</td><td>Let the splash finish; the map loads.</td><td>The <strong>location permission dialog</strong>. Tap <em>Allow While Using App</em>. Then let members appear as pins. Covers 5.1.1 purpose strings and the "sensitive data prompts" bullet.</td></tr>
+  <tr><td class="n">3</td><td>Show the door: tap through to <em>Join as a reader</em>, fill the first field, then go back without finishing.</td><td>Proves registration exists and works. Do not complete it — a real sign-up needs human approval, which is exactly the wall they hit.</td></tr>
+  <tr><td class="n">4</td><td>Sign in with the demo account.</td><td>The login flow, end to end, landing on the map as a full member.</td></tr>
+  <tr><td class="n">5</td><td>Map: <em>By skills</em>, <em>By zone</em>, <em>By route</em>. Open one member's profile.</td><td>The core product. Show the "Vouched by" chain — that is the thing that makes Trunex Trunex.</td></tr>
+  <tr><td class="n">6</td><td>Stories → open one → <em>Share a story</em> → attach a photo.</td><td>User-generated content, plus the <strong>camera and photo-library dialogs</strong>. Post something harmless.</td></tr>
+  <tr><td class="n">7</td><td>On another member's profile: the safety sheet → <strong>Block</strong>. Then <strong>Report</strong> → pick a category → submit.</td><td>Guideline 1.2. This is not optional — an app with UGC and no visible report/block path is rejected on sight. Finish with Settings → <em>Blocked members</em> showing the result.</td></tr>
+  <tr><td class="n">8</td><td>Chats: open a conversation, send a message. Business tab: open a listing.</td><td>The remaining core surfaces, so the flow reads as complete.</td></tr>
+  <tr><td class="n">9</td><td>You → <em>Invite someone</em> → pick from contacts.</td><td>The <strong>contacts permission dialog</strong>. Back out afterwards; do not send an invitation.</td></tr>
+  <tr><td class="n">10</td><td>Open the SOS sheet. Read the disclaimer on screen. <strong>Cancel.</strong></td><td>Shows the safety feature and its "not an emergency service — call 112" wording. <strong>Do not send.</strong> A live SOS alerts the ten nearest real members.</td></tr>
+  <tr><td class="n">11</td><td>Sign out. Sign back in with Face ID.</td><td>The <strong>Face ID dialog</strong>. Last of the four permission prompts.</td></tr>
+  <tr><td class="n">12</td><td>You → Settings → <em>Delete account</em> → read the screen → type DELETE → confirm.</td><td>Guideline 5.1.1(v). <strong>Film this on the throwaway account, not the demo account</strong> — the purge is real and irreversible.</td></tr>
+  <tr><td class="n">13</td><td>Swipe home.</td><td>A clean end.</td></tr>
+</table>
+
+<div class="box"><strong>Sending it.</strong> Reply in App Store Connect → App Review, attach the file there. Large files sometimes fail to attach, so we also paste an unlisted YouTube link in the reply text as a fallback. I will confirm the current attachment size cap before we send — I could not verify it from a primary Apple source in this session, and I am not going to state a number I have not checked.</div>
+
+<h2 class="newpage">4 · Draft reply — items 2 to 7, paste-ready</h2>
+<p>This is the text that goes into <em>App Store Connect → App Review Information → Notes</em>, and into the reply. Read it as the finished article; the highlighted fields are the ones only you can fill.</p>
+
+<div class="paste">
+<h4>Demo account</h4>
+<p>Trunex is an invitation-only network. A normal sign-up creates an account that a human moderator must approve by hand, which is why review was unable to reach the app's features. Please use the pre-approved demo account below. It is a full member, has no two-factor step, and does not expire.</p>
+<p>Username: <span class="tbd">TBD</span> · Password: <span class="tbd">TBD</span><br>
+Second account, provided so you can exercise account deletion without losing the first: <span class="tbd">TBD</span> / <span class="tbd">TBD</span></p>
+
+<h4>2 · Devices and operating systems tested</h4>
+<p><span class="tbd">TBD — see §6</span></p>
+
+<h4>3 · What the app does, who it is for</h4>
+<p>Trunex is a private, invitation-only network of adults who vouch for one another, so that a member can find trustworthy help from a real person anywhere they happen to be.</p>
+<p><strong>The problem it solves.</strong> When something goes wrong away from home — a breakdown on a foreign motorway, an unfamiliar city, a job that needs doing by someone who will not take advantage — open directories and public marketplaces cannot tell you who is actually trustworthy. Anyone can list themselves, and no one is accountable for the listing.</p>
+<p><strong>How Trunex answers it.</strong> Every member is personally invited and vouched for by an existing member, and that chain of vouching is visible on each profile, so trust is traceable to a named person rather than to a star rating. Members publish the skills they have and the geographic zones they know well. Another member can then search by skill, by area, or along a planned route, message the person directly, and see exactly who vouched for them. If something goes seriously wrong, an SOS alerts the ten nearest members and opens a group conversation with them.</p>
+<p><strong>The value.</strong> A member travelling, working or living away from home is never dependent on strangers with no accountability: they reach someone a member they trust has already vouched for.</p>
+<p><strong>Audience.</strong> Adults, 18 and over. Drivers and long-distance travellers, tradespeople, small business owners, and people living or working abroad. The app is not directed at children and contains no content aimed at them.</p>
+
+<h4>4 · Setting up and reaching the main features</h4>
+<ol>
+<li>Launch the app and allow location when asked. The map opens with members shown near you. Positions are deliberately offset by 200–300 m; Trunex never displays a member's exact location.</li>
+<li>Tap "Sign in" and use the demo credentials above.</li>
+<li><strong>Finding people</strong> — on the map, use "By skills", "By zone" or "By route". Tap any pin to open a member profile and see the vouching chain.</li>
+<li><strong>User-generated content</strong> — the Stories tab. Tap "Share a story" to post text and a photo.</li>
+<li><strong>Reporting and blocking</strong> — open any member profile, tap the safety action at the top right: Block is immediate, Report opens a category picker. Blocked members are listed under You → Settings → Blocked members.</li>
+<li><strong>Messaging</strong> — the Chats tab, one-to-one and group.</li>
+<li><strong>Businesses</strong> — the Business tab lists services run by members and recommended by other members.</li>
+<li><strong>SOS</strong> — the orange button on the map. Please do not complete an SOS: it alerts ten real members and opens a live conversation with them. The confirmation screen shows the full flow without sending.</li>
+<li><strong>Account deletion</strong> — You → Settings → Delete account. It is immediate and irreversible; please use the second demo account for it.</li>
+</ol>
+<p>No sample files are required.</p>
+
+<h4>5 · External services used</h4>
+<ul>
+<li><strong>Cloudflare Workers and Workers KV</strong> — application backend, hosting and data storage.</li>
+<li><strong>Mapbox GL</strong> — maps and geocoding.</li>
+<li><strong>Apple Push Notification service</strong>, addressed through Firebase Cloud Messaging — push notifications.</li>
+<li><strong>Resend</strong> — transactional email (sign-up, invitations, notifications).</li>
+<li><strong>Twilio</strong> — SMS one-time codes during sign-up.</li>
+<li><strong>Cloudflare Turnstile</strong> — anti-abuse verification on sign-up.</li>
+<li><strong>Anthropic Claude</strong> — used server-side only, for automated screening of member-submitted text against our community guidelines, and for drafting community email copy. It is not exposed as a chat or content-generation feature to members, and member data is not used to train any model.</li>
+<li><strong>Stripe</strong> — used only by the trunex.app website. The iOS app contains no purchase flow of any kind, opens no payment page, and never reaches Stripe.</li>
+</ul>
+<p><strong>Paid content.</strong> Version 1.4.0 ships entirely free. There are no in-app purchases, no subscriptions and no paid features, and no StoreKit products are declared for this build. There is therefore no purchase flow to demonstrate.</p>
+
+<h4>6 · Regional differences</h4>
+<p>The app behaves identically in every region. There is no region-locked content, no regional pricing, no geographically restricted feature, and no regional variation in what a member can see or do. The interface is in English everywhere. The member network is worldwide, so the people shown on the map differ by location — that is the product working as intended, not a regional feature difference.</p>
+
+<h4>7 · Regulated industries and third-party material</h4>
+<p>Trunex does not operate in a regulated industry. It provides no medical, legal or financial advice, processes no payments in this version, and is not an emergency service. The SOS feature states plainly, in the app and before every send, that it is not an emergency service, is not monitored around the clock, and that the user should call their local emergency number first.</p>
+<p>All content, branding and source code are owned by SC DKR Engineering SRL. Map data is licensed from Mapbox under their commercial terms. The app contains no third-party protected material.</p>
+
+<h4>Notes for the reviewer</h4>
+<ul>
+<li>Please do not send a live SOS — it alerts ten real members and opens a conversation with them.</li>
+<li>Account deletion is real and immediate; the second demo account is provided for it.</li>
+<li>The app requests location only while it is in the foreground. It has no background location capability and no tracking; it does not present the App Tracking Transparency prompt because it tracks nothing.</li>
+</ul>
+</div>
+
+<h2 class="newpage">5 · Risks that could earn us a second rejection</h2>
+<p>These are things I found in the code that a reviewer may run into. Each needs a decision from you.</p>
+
+<div class="box warn"><strong>R1 — The demo account must be pre-approved on production.</strong> If we hand them an account that lands on "Your application is with us", we get rejected again on the same ground. The account has to be a full approved member, on production <code>trunex.app</code> (not staging), with two-factor off, and it must not be suspended or expire during review.</div>
+
+<div class="box warn"><strong>R2 — The Donate row is visible on iOS but does nothing.</strong> "Donate" appears under You for every platform, but with billing off the native rail is unavailable and the call to action is disabled with the message "In-app purchases are not available in this version yet". A reviewer who taps it finds a dead end, which is a fair 2.1 finding. Two ways out: hide the row on iOS in a 1.4.1 build, or leave it and pre-empt it in the notes. My recommendation is to hide it — it costs one conditional and removes the finding entirely.</div>
+
+<div class="box warn"><strong>R3 — Turnstile on sign-up.</strong> The reviewer may try to register before reading the notes. If the anti-abuse check misfires on their network, they will read it as a broken sign-up. Worth a line in the notes telling them to use the demo account rather than registering.</div>
+
+<div class="box warn"><strong>R4 — A reviewer may send a live SOS.</strong> It alerts the ten nearest real members. The written warning above helps, but it is a request, not a guard. Tell me if you want a code-level guard for flagged demo accounts; that is a change to the next build, not something to fix in the reply.</div>
+
+<h2>6 · What I need from you</h2>
+<p>Everything else I can finish alone. These four are yours, because inventing them is exactly the kind of thing the rules forbid.</p>
+<table>
+  <tr><th class="n">#</th><th style="width:58mm">Question</th><th>Why I cannot answer it myself</th></tr>
+  <tr><td class="n">1</td><td>Which iPhone model(s) and iOS version did you test 1.4.0 on before submitting?</td><td>Apple's item 2 asks for it literally. I have no record of your test devices and will not fabricate a list.</td></tr>
+  <tr><td class="n">2</td><td>Does a pre-approved demo account already exist on production? If not, shall I create two — one member, one throwaway for the deletion shot?</td><td>I can create them through the backend if you want me to, but not without your word.</td></tr>
+  <tr><td class="n">3</td><td>Do you have an iPhone on hand to film on, and is it on the latest iOS?</td><td>The recording has to come from a physical iOS device. If you do not have one, we need a different plan and I want to know now, not after the reply is drafted.</td></tr>
+  <tr><td class="n">4</td><td>R2 — hide the Donate row on iOS in a 1.4.1 build, or explain it in the notes?</td><td>Hiding it means a new build and a new review cycle; explaining it means we ship the reply today and accept a small risk.</td></tr>
+</table>
+
+<div class="foot">Trunex Main · App Store review reply plan v1.0 · 31 August 2026 · Verified against <code>gabinicolae01-cloud/trunex-app</code> @ <code>1d13b40</code>. Nothing in this document has been sent to Apple.</div>
+
+</body></html>
