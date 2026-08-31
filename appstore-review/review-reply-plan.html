@@ -49,6 +49,22 @@ Prepared for PO approval. <strong>Nothing is sent to Apple until you approve it.
   <tr><td>The door</td><td>Membership is invitation-only <strong>and human-approved</strong>. A normal sign-up lands on "Your application is with us". This is almost certainly why the reviewer could not exercise the app.</td></tr>
 </table>
 
+<h3>How build 19 got to Apple — 28 to 30 August</h3>
+<p>Reconstructed from the commits and build runs, each stamped with the session that did the work. This is the record of the submission, in place of the session notes.</p>
+<table>
+  <tr><th style="width:26mm">Local time</th><th>What happened</th></tr>
+  <tr><td>28 Aug 10:25</td><td>Pre-submission blockers: <code>PrivacyInfo.xcprivacy</code> added (ITMS-91053), Anthropic disclosed as a US processor in the privacy policy, admin <code>/seasonal</code> privilege-escalation hole closed, operator corrected to <strong>SC Trunex SRL</strong>.</td></tr>
+  <tr><td>28 Aug 11:32</td><td>iOS marketing version aligned to <strong>1.4.0 (build 18)</strong> — it had lagged at 1.2.79.</td></tr>
+  <tr><td>30 Aug 12:18</td><td><code>/child-safety</code> standards page shipped for Play's CSAE declaration.</td></tr>
+  <tr><td>30 Aug 13:16</td><td>Full IAP audit: the paywall was exported but mounted on <strong>no route</strong>, so nothing was buyable — a certain 2.1 rejection. Routed, 3.1.2 disclosures added, runner pinned to macos-26.</td></tr>
+  <tr><td>30 Aug 13:25</td><td>Push entitlement (<code>aps-environment</code>) added — ITMS-90078.</td></tr>
+  <tr><td>30 Aug 14:00</td><td><strong>PO decision: v1 ships free.</strong> Billing reverted to off; Pro and Passes rows hidden when billing is off.</td></tr>
+  <tr><td>30 Aug 14:11</td><td>Signing fixed: archive unsigned, distribution signing applied at export.</td></tr>
+  <tr><td>30 Aug 14:18</td><td>altool 90474 — the bundle declared iPad but ships portrait-only. Switched to <strong>iPhone-only</strong>.</td></tr>
+  <tr><td>30 Aug 14:30</td><td>ITMS-90683 — the Contacts plugin references the Contacts API, so <code>NSContactsUsageDescription</code> became mandatory. Added, <strong>build 18 → 19</strong>.</td></tr>
+  <tr><td>30 Aug 14:35</td><td><strong>Build 19 uploaded to App Store Connect.</strong> Fourth run, successful.</td></tr>
+</table>
+
 <h2>2 · The video — what Apple is actually asking for</h2>
 <p>This is the part you said was unclear, so plainly:</p>
 <p><strong>It is not a marketing video.</strong> It is not the App Preview that appears on the store page. It is private evidence, seen only by the reviewer. Its single purpose is to prove that a human being held a real iPhone and that the app does what the listing says it does.</p>
@@ -148,7 +164,7 @@ Second account, provided so you can exercise account deletion without losing the
 
 <h4>7 · Regulated industries and third-party material</h4>
 <p>Trunex does not operate in a regulated industry. It provides no medical, legal or financial advice, processes no payments in this version, and is not an emergency service. The SOS feature states plainly, in the app and before every send, that it is not an emergency service, is not monitored around the clock, and that the user should call their local emergency number first.</p>
-<p>All content, branding and source code are owned by SC DKR Engineering SRL. Map data is licensed from Mapbox under their commercial terms. The app contains no third-party protected material.</p>
+<p>All content, branding and source code are owned by SC Trunex SRL. Map data is licensed from Mapbox under their commercial terms. The app contains no third-party protected material.</p>
 
 <h4>Notes for the reviewer</h4>
 <ul>
@@ -163,7 +179,7 @@ Second account, provided so you can exercise account deletion without losing the
 
 <div class="box warn"><strong>R1 — The demo account must be pre-approved on production.</strong> If we hand them an account that lands on "Your application is with us", we get rejected again on the same ground. The account has to be a full approved member, on production <code>trunex.app</code> (not staging), with two-factor off, and it must not be suspended or expire during review.</div>
 
-<div class="box warn"><strong>R2 — The Donate row is visible on iOS but does nothing.</strong> "Donate" appears under You for every platform, but with billing off the native rail is unavailable and the call to action is disabled with the message "In-app purchases are not available in this version yet". A reviewer who taps it finds a dead end, which is a fair 2.1 finding. Two ways out: hide the row on iOS in a 1.4.1 build, or leave it and pre-empt it in the notes. My recommendation is to hide it — it costs one conditional and removes the finding entirely.</div>
+<div class="box warn"><strong>R2 — The Donate row is visible on iOS but does nothing.</strong> Commit <code>8808c39</code> (30 Aug) already hides Trunex Pro and Passes when billing is off, so those are clean. <strong>Donate was left outside that guard</strong> and still appears under You on every platform; with billing off the native rail is unavailable and the call to action is disabled with "In-app purchases are not available in this version yet". A reviewer who taps it finds a dead end, which is a fair 2.1 finding. Two ways out: move Donate behind the same guard in a 1.4.1 build, or leave it and pre-empt it in the notes. My recommendation is to hide it — it is the same one-line conditional that already covers Pro and Passes.</div>
 
 <div class="box warn"><strong>R3 — Turnstile on sign-up.</strong> The reviewer may try to register before reading the notes. If the anti-abuse check misfires on their network, they will read it as a broken sign-up. Worth a line in the notes telling them to use the demo account rather than registering.</div>
 
