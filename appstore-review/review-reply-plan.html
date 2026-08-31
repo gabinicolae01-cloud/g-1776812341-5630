@@ -179,20 +179,19 @@ Second account, provided so you can exercise account deletion without losing the
 
 <div class="box warn"><strong>R1 — The demo account must be pre-approved on production.</strong> If we hand them an account that lands on "Your application is with us", we get rejected again on the same ground. The account has to be a full approved member, on production <code>trunex.app</code> (not staging), with two-factor off, and it must not be suspended or expire during review.</div>
 
-<div class="box warn"><strong>R2 — The Donate row is visible on iOS but does nothing.</strong> Commit <code>8808c39</code> (30 Aug) already hides Trunex Pro and Passes when billing is off, so those are clean. <strong>Donate was left outside that guard</strong> and still appears under You on every platform; with billing off the native rail is unavailable and the call to action is disabled with "In-app purchases are not available in this version yet". A reviewer who taps it finds a dead end, which is a fair 2.1 finding. Two ways out: move Donate behind the same guard in a 1.4.1 build, or leave it and pre-empt it in the notes. My recommendation is to hide it — it is the same one-line conditional that already covers Pro and Passes.</div>
+<div class="box"><strong>R2 — The Donate dead end: fixed.</strong> Commit <code>8808c39</code> (30 Aug) hid Trunex Pro and Passes when billing is off, but Donate was left outside that guard and still opened a screen whose only call to action is disabled. It is now gated on the resolved payment rail rather than on the build flag, so it disappears on a device that cannot take money and stays on the web, where Stripe can. Four tests cover it; typecheck and the full suite pass. On branch <code>claude/session-continuity-claudemd</code> in <code>trunex-app</code>, awaiting your call on whether 1.4.0 (19) is replaced by a 1.4.1 or the reply goes as-is.</div>
 
 <div class="box warn"><strong>R3 — Turnstile on sign-up.</strong> The reviewer may try to register before reading the notes. If the anti-abuse check misfires on their network, they will read it as a broken sign-up. Worth a line in the notes telling them to use the demo account rather than registering.</div>
 
 <div class="box warn"><strong>R4 — A reviewer may send a live SOS.</strong> It alerts the ten nearest real members. The written warning above helps, but it is a request, not a guard. Tell me if you want a code-level guard for flagged demo accounts; that is a change to the next build, not something to fix in the reply.</div>
 
 <h2>6 · What I need from you</h2>
-<p>Everything else I can finish alone. These four are yours.</p>
+<p>Everything else is done. These three are facts only you hold.</p>
 <table>
   <tr><th class="n">#</th><th style="width:58mm">Question</th><th>Why it has to come from you</th></tr>
   <tr><td class="n">1</td><td>Which iPhone model(s) and iOS version did you test 1.4.0 on before submitting?</td><td>Apple's item 2 asks for it literally. The list has to come from the devices in your hand.</td></tr>
   <tr><td class="n">2</td><td>Does a pre-approved demo account already exist on production? If not, shall I create two — one member, one throwaway for the deletion shot?</td><td>I can create them through the backend on your word.</td></tr>
   <tr><td class="n">3</td><td>Do you have an iPhone on hand to film on, and is it on the latest iOS?</td><td>The recording has to come from a physical iOS device. Without one we need a different plan, and that changes the whole reply.</td></tr>
-  <tr><td class="n">4</td><td>R2 — hide the Donate row on iOS in a 1.4.1 build, or explain it in the notes?</td><td>Hiding it means a new build and a new review cycle; explaining it means we ship the reply today and accept a small risk.</td></tr>
 </table>
 
 <div class="foot">Trunex Main · App Store review reply plan v1.0 · 31 August 2026 · Verified against <code>gabinicolae01-cloud/trunex-app</code> @ <code>1d13b40</code>. Nothing in this document has been sent to Apple.</div>
